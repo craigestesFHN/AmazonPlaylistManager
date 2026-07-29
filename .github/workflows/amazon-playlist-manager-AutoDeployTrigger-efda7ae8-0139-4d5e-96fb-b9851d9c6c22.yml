@@ -17,7 +17,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions: 
-      id-token: write #This is required for requesting the OIDC JWT Token
       contents: read #Required when GH token is used to authenticate with private repo
 
     steps:
@@ -28,6 +27,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_SUBSCRIPTION_ID }}
 
@@ -45,5 +45,4 @@ jobs:
           imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
-
 
