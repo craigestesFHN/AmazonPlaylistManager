@@ -15,16 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write # CRITICAL: Allows GitHub to fetch the federated token for Azure
 
     steps:
       - name: Checkout to the branch
         uses: actions/checkout@v4
 
-      - name: Azure Login
+      - name: Azure Login via OIDC
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_SUBSCRIPTION_ID }}
 
