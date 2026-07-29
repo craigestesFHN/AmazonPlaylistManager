@@ -35,3 +35,4 @@ jobs:
           runtimeStack: dotnet
           containerAppName: amazon-playlist-manager
           resourceGroup: DEV
+          disableTelemetry: true
