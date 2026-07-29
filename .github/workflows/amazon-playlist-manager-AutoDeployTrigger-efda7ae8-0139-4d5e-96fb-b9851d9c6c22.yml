@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # CRITICAL: Allows GitHub to fetch the federated token for Azure
+      id-token: write
 
     steps:
       - name: Checkout to the branch
@@ -28,10 +28,10 @@ jobs:
           tenant-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_SUBSCRIPTION_ID }}
 
-      - name: Build and Deploy to Azure Container Apps via Buildpacks
+      - name: Build and Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
-          buildpackName: dotnet
+          runtimeStack: dotnet
           containerAppName: amazon-playlist-manager
           resourceGroup: DEV
