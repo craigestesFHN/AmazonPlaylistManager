@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - '**'
-      - '.github/workflows/amazon-playlist-manager-AutoDeployTrigger-efda7ae8-0139-4d5e-96fb-b9851d9c6c22.yml'
 
   workflow_dispatch:
 
@@ -18,7 +17,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout to the branch
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Azure Login via OIDC
@@ -28,11 +27,12 @@ jobs:
           tenant-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_SUBSCRIPTION_ID }}
 
-      - name: Build and Deploy to Azure Container Apps
-        uses: azure/container-apps-deploy-action@v2
-        with:
-          appSourcePath: ${{ github.workspace }}
-          runtimeStack: 'dotnet:8.0'
-          containerAppName: amazon-playlist-manager
-          resourceGroup: DEV
-          disableTelemetry: true
+      - name: Install Container App CLI Extension
+        run: az extension add --name containerapp --upgrade
+
+      - name: Build and Deploy Direct from Source
+        run: |
+          az containerapp up \
+            --name amazon-playlist-manager \
+            --resource-group DEV \
+            --source .
