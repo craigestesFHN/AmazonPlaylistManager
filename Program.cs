@@ -15,7 +15,7 @@ app.MapPost("/api/context", () => Results.Ok(new {
     mood = "Relaxed Acoustic"
 }));
 // 2. POST /api/music/search (Mocked catalog search)
-app.MapGet("/api/music/all", () => (Results.Ok);
+app.MapGet("/api/music/all", () => Results.Ok);
 // 2. POST /api/music/search (Mocked catalog search)
 app.MapPost("/api/music/search", (SearchRequest req) => Results.Ok(new {
     resolvedTracks = req.Tracks.Select(t => new {
