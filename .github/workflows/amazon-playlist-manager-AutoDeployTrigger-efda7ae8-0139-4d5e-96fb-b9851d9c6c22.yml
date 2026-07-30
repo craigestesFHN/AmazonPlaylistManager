@@ -27,12 +27,10 @@ jobs:
           tenant-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AMAZONPLAYLISTMANAGER_AZURE_SUBSCRIPTION_ID }}
 
-      - name: Install Container App CLI Extension
-        run: az extension add --name containerapp --upgrade
-
-      - name: Build and Deploy Direct from Source
-        run: |
-          az containerapp up \
-            --name amazon-playlist-manager \
-            --resource-group DEV \
-            --source .
+      - name: Build and Deploy to Azure Container Apps
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          acrName: conceptimages
+          containerAppName: amazon-playlist-manager
+          resourceGroup: DEV
