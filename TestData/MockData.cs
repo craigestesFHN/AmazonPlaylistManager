@@ -13,8 +13,8 @@ namespace SparkMusicBridge.TestData
             {
                 tmpTracks = new List<TrackItem>
                 {
-                    new TrackItem("Song A", "Artist 1"),
-                    new TrackItem("Song B", "Artist 1")
+                    new TrackItem("Higher", "Creed"),
+                    new TrackItem("My Own Prison", "Creed")
                 };
                 Result = new Playlist(tmpTracks);
             }
