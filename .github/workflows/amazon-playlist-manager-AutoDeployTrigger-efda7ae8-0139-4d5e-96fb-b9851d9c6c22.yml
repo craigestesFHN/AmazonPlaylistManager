@@ -35,5 +35,7 @@ jobs:
         with:
           appSourcePath: ${{ github.workspace }}
           acrName: conceptimages
+          acrUsername: ${{ secrets.ACR_USERNAME }}
+          acrPassword: ${{ secrets.ACR_PASSWORD }}
           containerAppName: amazon-playlist-manager
           resourceGroup: DEV
