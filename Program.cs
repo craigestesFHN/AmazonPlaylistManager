@@ -1,3 +1,4 @@
+using SparkMusicBridge.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,7 +16,7 @@ app.MapPost("/api/context", () => Results.Ok(new {
     mood = "Relaxed Acoustic"
 }));
 // 2. POST /api/music/search (Mocked catalog search)
-app.MapGet("/api/music/all", () => Results.Ok());
+app.MapGet("/api/music/all", () => Results.Ok(SparkMusicBridge.TestData.MockData.GetPlaylist()));
 // 2. POST /api/music/search (Mocked catalog search)
 app.MapPost("/api/music/search", (SearchRequest req) => Results.Ok(new {
     resolvedTracks = req.Tracks.Select(t => new {
@@ -34,6 +35,5 @@ app.MapPost("/api/music/playlist/update", (UpdatePlaylistRequest req) => Results
 
 app.Run();
 
-record TrackItem(string Title, string Artist);
-record SearchRequest(List<TrackItem> Tracks);
-record UpdatePlaylistRequest(string TargetPlaylistName, List<string> AmazonTrackIds);
+
+
