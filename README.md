@@ -1,3 +1,3 @@
 # AmazonPlaylistManager
 Spark Manages Amazon Music Playlist via Azure Fuctions
-1.8
+1.9
